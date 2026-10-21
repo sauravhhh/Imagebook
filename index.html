@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ChatGPT Image Generation Guidebook — Saurabh Saha</title>
+<meta name="description" content="A 14-page guidebook on ChatGPT image generation — prompts, styles, editing, posters and logos, using only your mobile.">
+<meta name="theme-color" content="#FAF4E8">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF4E8; --paper2:#F3EADA; --line:#E4D7C0;
+    --ink:#2B2D33; --soft:#5E5A52; --mute:#8E836F;
+    --navy:#22314F; --navy-d:#18233A;
+    --terra:#BC4F2E; --terra-d:#A2411F;
+    --head:'Fraunces',Georgia,serif;
+    --sans:'Manrope',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+    --pad:24px; --ease:cubic-bezier(.2,.7,.2,1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);font-size:17px;line-height:1.7;background-color:var(--paper);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .28 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E");
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1060px;margin:0 auto;padding-left:var(--pad);padding-right:var(--pad)}
+  button{font-family:inherit;cursor:pointer}
+  img{max-width:100%}
+
+  /* top bar */
+  .top{padding-top:20px}
+  .brand{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:14.5px;color:var(--navy);text-decoration:none}
+  .brand .ava{width:30px;height:30px;border-radius:50%;background:var(--navy);color:#FBF6EC;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;box-shadow:0 0 0 1px rgba(34,49,79,.12)}
+
+  /* hero */
+  .hero{display:grid;grid-template-columns:1fr;justify-items:center;text-align:center;padding-top:34px;padding-bottom:56px}
+  .hero-text{max-width:560px}
+  .hero-text .over{font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:13px;color:var(--terra)}
+  .hero-text h1{font-family:var(--head);font-weight:700;font-size:clamp(44px,9vw,64px);line-height:1.05;color:var(--navy);margin-top:6px}
+  .hero-text .sub{font-size:19px;color:var(--ink);margin-top:14px;font-weight:600}
+  .hero-text .tagline{color:var(--soft);margin-top:6px}
+  .pill{display:inline-block;margin-top:16px;padding:5px 15px;border:1px solid var(--line);border-radius:999px;background:var(--paper2);font-weight:700;font-size:14px;color:var(--navy)}
+
+  /* 3d book stage */
+  .stage{position:relative;width:58vw;max-width:250px;margin:86px auto 0;--t:9px}
+  .glow{position:absolute;z-index:0;pointer-events:none;left:50%;transform:translateX(-50%);top:-46px;bottom:-12px;width:calc(100% + 112px);max-width:calc(100vw - 2 * var(--pad));border-radius:999px 999px 22px 22px;
+    background:radial-gradient(115% 62% at 50% 36%,rgba(255,238,208,.17),rgba(255,238,208,0) 70%),linear-gradient(180deg,var(--navy) 0%,var(--navy-d) 100%)}
+  .float{position:relative;z-index:1;perspective:1500px;animation:float 7s ease-in-out infinite;will-change:transform}
+  @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-11px)}}
+  .book{position:relative;transform-style:preserve-3d;transform:rotateX(4deg) rotateY(-18deg);aspect-ratio:3/4.24;width:100%}
+  .face{position:absolute;inset:0;border-radius:2px 4px 4px 2px}
+  .front{transform:translateZ(calc(var(--t) / 2));overflow:hidden;box-shadow:0 0 0 .5px rgba(0,0,0,.3),0 1px 2px rgba(0,0,0,.25);background:linear-gradient(155deg,#2A3C63 0%,var(--navy) 55%,var(--navy-d) 100%);color:#FBF6EC;display:flex;flex-direction:column;padding:20px 18px;text-align:left}
+  .front::before{content:"";position:absolute;inset:0;background:linear-gradient(105deg,rgba(255,255,255,.14) 0%,rgba(255,255,255,0) 42%);pointer-events:none}
+  .front .k{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#E9B44C;font-weight:800}
+  .front h2{font-family:var(--head);font-size:30px;line-height:1.08;margin-top:8px;font-weight:700}
+  .front h2 span{color:#E9B44C}
+  .front .s{font-size:12.5px;color:#C9D2E4;margin-top:9px;line-height:1.5}
+  .front .f{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#93A3C0}
+  .front .f b{color:#FBF6EC;font-size:11px}
+  .front .rule{width:34px;height:3px;background:var(--terra);border-radius:2px;margin-top:14px}
+  .back{transform:translateZ(calc(var(--t) / -2)) rotateY(180deg);background:var(--navy-d)}
+  .edge{inset:auto;top:1px;bottom:1px;left:50%;width:var(--t);transform:translateX(-50%) rotateY(90deg) translateZ(0);background:repeating-linear-gradient(90deg,#EFE6D0 0 1.5px,#DCD0B6 1.5px 3px);transform:rotateY(-90deg) translateZ(calc(125px - var(--t)/2));display:none}
+  .spine{position:absolute;top:0;bottom:0;left:0;width:var(--t);transform:rotateY(-90deg) translateZ(calc(var(--t)/2));transform-origin:left;background:#141D31}
+  .ground{width:84%;height:20px;margin:18px auto 0;position:relative;left:-3%;border-radius:50%;background:radial-gradient(closest-side,rgba(4,8,16,.88),rgba(4,8,16,.36) 60%,transparent);filter:blur(4px);animation:ground 7s ease-in-out infinite}
+  @keyframes ground{0%,100%{transform:scaleX(1);opacity:.85}50%{transform:scaleX(.9);opacity:.65}}
+  .peek{position:absolute;left:50%;bottom:-31px;transform:translateX(-50%);z-index:3;display:inline-flex;align-items:center;gap:7px;padding:8px 16px 8px 13px;border:1px solid rgba(255,255,255,.24);border-radius:999px;background:rgba(255,255,255,.1);color:#F4ECDD;font-weight:600;font-size:14.5px;white-space:nowrap;backdrop-filter:blur(6px)}
+  .peek:hover{background:rgba(255,255,255,.2)}
+
+  /* buy row */
+  .buy{display:flex;align-items:center;justify-content:center;gap:22px;margin-top:66px;width:100%;max-width:360px}
+  .price-wrap{text-align:left}
+  .was{display:flex;align-items:center;gap:7px;font-size:16px;font-weight:500;color:var(--mute);margin-bottom:7px}
+  .was s{text-decoration-thickness:1.5px;text-decoration-color:var(--terra)}
+  .was em{font-style:normal;background:#F6E3D3;color:var(--terra-d);font-weight:700;font-size:12.5px;padding:2px 8px;border-radius:999px}
+  .price{font-weight:800;font-size:34px;line-height:1;color:var(--navy)}
+  .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;min-height:56px;padding:12px 26px;border:none;border-radius:999px;background:var(--navy);color:#FBF6EC;font-weight:700;font-size:18.5px;box-shadow:0 1px 0 rgba(255,255,255,.14) inset,0 14px 28px -14px rgba(24,35,58,.75);transition:background .25s,transform .25s var(--ease),box-shadow .25s;text-decoration:none}
+  .btn:hover{background:var(--navy-d);transform:translateY(-1px)}
+  .btn-sm{min-height:46px;font-size:16px;padding:9px 20px;flex:none}
+
+  /* difference */
+  .diff{padding-top:16px;padding-bottom:8px}
+  .diff h2,.faq h2{font-family:var(--head);font-weight:700;font-size:clamp(24px,5.4vw,30px);color:var(--navy);text-align:center;margin-bottom:22px}
+  .diff-grid{display:grid;grid-template-columns:1fr;gap:14px;max-width:640px;margin:0 auto;text-align:left}
+  @media(min-width:700px){.diff-grid{grid-template-columns:1fr 1fr}}
+  .diff-card{background:#F6EEDF;border:1px solid var(--line);border-radius:18px;padding:22px 22px 20px}
+  .diff-card.gn{background:var(--navy);border-color:var(--navy);color:#E9EDF5}
+  .diff-card h3{font-size:15px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--terra)}
+  .diff-card.gn h3{color:#E9B44C}
+  .diff-card .who{font-weight:800;font-size:18px;margin:4px 0 2px;color:var(--navy)}
+  .diff-card.gn .who{color:#fff}
+  .diff-logos{display:flex;gap:7px;margin:10px 0 12px;flex-wrap:wrap}
+  .diff-logos span{font-size:12.5px;font-weight:700;border:1px solid var(--line);background:rgba(255,255,255,.55);border-radius:999px;padding:3px 10px;color:var(--soft)}
+  .diff-card.gn .diff-logos span{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16);color:#C9D2E4}
+  .diff-card p{font-size:15.5px;line-height:1.65;color:var(--soft)}
+  .diff-card.gn p{color:#C9D2E4}
+  .diff .after{max-width:640px;margin:18px auto 0;text-align:center;color:var(--soft);font-size:16px}
+
+  /* faq */
+  .faq{max-width:640px;padding-top:36px;padding-bottom:40px}
+  .faq details{border-bottom:1px solid var(--line)}
+  .faq summary{position:relative;list-style:none;cursor:pointer;padding:17px 28px 17px 0;font-weight:700;font-size:17px;color:var(--ink)}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::before,.faq summary::after{content:"";position:absolute;right:4px;top:50%;width:12px;height:1.5px;background:var(--navy);transition:transform .3s var(--ease),opacity .3s}
+  .faq summary::after{transform:rotate(90deg)}
+  .faq details[open ] summary::after{transform:rotate(0deg);opacity:0}
+  .faq details p{padding:0 0 18px;color:var(--soft);font-size:16px}
+
+  /* footer */
+  .foot{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;padding-top:24px;padding-bottom:118px;color:var(--mute);font-size:14.5px}
+  .foot .ava{width:38px;height:38px;border-radius:50%;background:var(--navy);color:#FBF6EC;display:flex;align-items:center;justify-content:center;font-weight:800}
+
+  /* sticky bar */
+  .sticky{position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:20;display:flex;align-items:center;gap:12px;padding:8px 8px 8px 18px;border-radius:999px;background:rgba(250,244,232,.86);-webkit-backdrop-filter:blur(14px) saturate(1.2);backdrop-filter:blur(14px) saturate(1.2);box-shadow:0 0 0 1px rgba(34,49,79,.08),0 16px 32px -18px rgba(34,49,79,.5);transform:translateY(calc(100% + 28px));transition:transform .45s var(--ease);max-width:520px;margin:0 auto}
+  .sticky.show{transform:translateY(0)}
+  .sticky .t{font-weight:800;font-size:14.5px;color:var(--navy);line-height:1.25}
+  .sticky .p{font-size:13.5px;color:var(--mute)}
+  .sticky .p b{color:var(--navy);font-size:15px}
+  .sticky .p s{text-decoration-color:var(--terra)}
+  .sticky .sp{flex:1}
+
+  /* overlays */
+  .overlay{position:fixed;inset:0;z-index:50;display:none}
+  .overlay.open{display:block}
+  .scrim{position:absolute;inset:0;background:rgba(16,20,30,.72);backdrop-filter:blur(3px)}
+
+  /* reader */
+  .rd .rd-card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px}
+  .rd-bar{position:absolute;top:0;left:0;right:0;display:flex;justify-content:flex-end;padding:14px}
+  .lb-btn{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#F4ECDD;font-size:19px}
+  .rd-stage{position:relative;perspective:1800px}
+  .rd-fly{animation:fly .5s var(--ease)}
+  @keyframes fly{from{transform:rotateY(7deg) translateX(14px);opacity:.4}to{transform:rotateY(0) translateX(0);opacity:1}}
+  .rd-book{--pw:min(84vw,400px,calc((100svh - 210px) * .7059));position:relative;width:var(--pw);height:calc(var(--pw) * 1.4167);border-radius:3px 6px 6px 3px;box-shadow:0 30px 60px -18px rgba(0,0,0,.65);overflow:hidden;background:#FFFDF6}
+  .rd-page{position:absolute;inset:0;padding:26px 24px;display:none;flex-direction:column}
+  .rd-page.on{display:flex}
+  .rd-page .pg-k{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--terra);font-weight:800}
+  .rd-page h4{font-family:var(--head);font-size:23px;color:var(--navy);line-height:1.2;margin-top:8px}
+  .rd-page p{font-size:14.5px;line-height:1.65;color:var(--soft);margin-top:10px}
+  .rd-page .pg-n{margin-top:auto;text-align:center;color:var(--mute);font-size:12.5px}
+  .rd-page.coverp{background:linear-gradient(155deg,#2A3C63,var(--navy) 55%,var(--navy-d));color:#FBF6EC}
+  .rd-page.coverp h4{color:#fff;font-size:30px}
+  .rd-page.coverp p{color:#C9D2E4}
+  .rd-lock{margin-top:14px;display:inline-flex;align-items:center;gap:.5em;padding:.5em 1.05em;border-radius:999px;background:rgba(188,79,46,.12);color:var(--terra-d);font-weight:700;font-size:13px;align-self:flex-start}
+  .rd-nav{position:absolute;top:50%;transform:translateY(-50%);z-index:3}
+  .lb-prev{left:-8px}.lb-next{right:-8px}
+  @media(min-width:560px){.lb-prev{left:-64px}.lb-next{right:-64px}}
+  .rd-hint{color:#B9C2D4;font-size:13.5px;margin-top:16px;text-align:center}
+  .rd-end{align-items:center;text-align:center;justify-content:center}
+  .rd-end .rd-end-logo{width:52px;height:52px;border-radius:50%;background:var(--navy);color:#FBF6EC;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:21px}
+  .rd-end .price{margin-top:8px}
+  .rd-end .was{justify-content:center}
+
+  /* payment sheet */
+  .pay{display:none}
+  .pay.open{display:block}
+  .pay .scrim{background:rgba(16,20,30,.6)}
+  .pay-card{position:absolute;left:0;right:0;bottom:0;margin:0 auto;width:100%;max-width:440px;max-height:calc(100dvh - 24px);overflow:auto;background:var(--paper);border-radius:22px 22px 0 0;padding:8px 22px calc(24px + env(safe-area-inset-bottom));box-shadow:0 -20px 50px -20px rgba(0,0,0,.4);animation:up .4s var(--ease)}
+  @keyframes up{from{transform:translateY(24px);opacity:.6}to{transform:translateY(0);opacity:1}}
+  @media(min-width:520px){.pay-card{border-radius:22px;bottom:24px}}
+  .pay-head{display:flex;align-items:center;justify-content:space-between;padding:12px 0 4px}
+  .pay-head h3{font-family:var(--head);font-size:21px;color:var(--navy)}
+  .pay-x{display:flex;align-items:center;justify-content:center;width:40px;height:40px;margin-right:-8px;border:0;background:none;border-radius:50%;color:var(--navy);font-size:19px}
+  .pay-step{display:flex;gap:12px;margin-top:18px}
+  .pay-step b{flex:none;display:flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;background:var(--navy);color:#FBF6EC;font-size:14px;margin-top:2px}
+  .pay-step .tx{flex:1}
+  .pay-step .tx strong{font-size:16.5px;color:var(--ink)}
+  .pay-step .tx strong .amt{color:var(--terra-d)}
+  .pay-num{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;padding:10px 10px 10px 18px;border:1px solid var(--line);border-radius:14px;background:#fff}
+  .pay-num .id{font-weight:800;font-size:18px;color:var(--navy);letter-spacing:.01em}
+  .pay-num .id small{display:block;font-weight:600;font-size:12px;color:var(--mute);letter-spacing:.06em;text-transform:uppercase}
+  .pay-copy{flex:none;min-height:40px;padding:6px 16px;border:1px solid var(--navy);border-radius:999px;background:none;color:var(--navy);font-weight:700;font-size:14.5px}
+  .pay-note{font-size:13.5px;color:var(--mute);margin-top:10px;line-height:1.55}
+  .pay-qr{display:block;width:172px;height:172px;margin:14px auto 2px;border:1px solid var(--line);border-radius:14px;background:#fff}
+  .pay-upi-btn{display:flex;margin-top:12px;background:#15803d}
+  .pay-upi-btn:hover{background:#11632f}
+  .pay input{width:100%;margin-top:12px;border:1px solid #CFC2A6;border-radius:12px;padding:13px 14px;font-size:16.5px;font-family:inherit;background:#fff;color:var(--ink)}
+  .pay input:focus{outline:2px solid var(--navy);outline-offset:1px;border-color:transparent}
+  .pay .go{width:100%;margin-top:14px}
+  .pay-err{display:none;color:#B3261E;font-size:13.5px;margin-top:8px}
+  .pay-done{display:none;text-align:center;padding-top:10px}
+  .pay-ok{display:flex;align-items:center;justify-content:center;width:60px;height:60px;margin:4px auto 0;border-radius:50%;background:var(--navy);color:#FBF6EC;font-size:27px}
+  .pay-done h4{font-family:var(--head);font-size:21px;color:var(--navy);margin-top:14px}
+  .pay-done p{color:var(--soft);font-size:14.5px;margin-top:6px}
+  .pay-done .btn{width:100%;margin-top:16px}
+</style>
+</head>
+<body>
+
+<header class="top wrap">
+  <a class="brand" href="#"><span class="ava">S</span> Saurabh Saha</a>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="hero-text">
+      <div class="over">ChatGPT Image Generation</div>
+      <h1>Guidebook</h1>
+      <p class="sub">Make any image you can describe — posters, covers, posts and more</p>
+      <span class="pill">14 pages</span>
+      <p class="tagline">From one sentence in a chat box to a ready-to-post picture, using only your mobile</p>
+    </div>
+
+    <div class="stage">
+      <div class="glow"></div>
+      <div class="float">
+        <div class="book" aria-label="Gemini Notebook Guidebook cover">
+          <div class="face back"></div>
+          <div class="face front">
+            <div>
+              <div class="k">ChatGPT Image Generation</div>
+              <h2>The<br><span>Guidebook</span></h2>
+              <div class="rule"></div>
+              <p class="s">Make any image you can describe — posters, covers, posts and more.</p>
+            </div>
+            <div class="f"><span>14 Pages</span><b>Step by step</b></div>
+          </div>
+        </div>
+      </div>
+      <div class="ground"></div>
+      <button class="peek js-peek" type="button">👁 Look inside</button>
+    </div>
+
+    <div class="buy">
+      <div class="price-wrap">
+        <div class="was"><s>₹99</s><em>50% off</em></div>
+        <div class="price">₹49</div>
+      </div>
+      <button class="btn js-buy" type="button">Get the Guidebook</button>
+    </div>
+  </section>
+
+  <!-- DIFFERENCE -->
+  <section class="diff wrap">
+    <h2>Searching for images vs generating them — the difference</h2>
+    <div class="diff-grid">
+      <div class="diff-card">
+        <h3>Stock photos &amp; searching</h3>
+        <div class="who">Google Images, stock sites</div>
+        <div class="diff-logos"><span>Search</span><span>Download</span><span>Settle</span></div>
+        <p>You hunt through pictures other people made, and settle for the closest match. The scene is never quite yours, the text is never your text, and the good ones are often paid or watermarked.</p>
+      </div>
+      <div class="diff-card gn">
+        <h3>ChatGPT Image Generation</h3>
+        <div class="who">From your own words</div>
+        <div class="diff-logos"><span>Your scene</span><span>Your style</span><span>Your text</span></div>
+        <p>Type a sentence and a brand-new image is created from it — your scene, your colours, your words on the poster. Not happy with one part? Just reply, and it edits the picture.</p>
+      </div>
+    </div>
+    <p class="after">How to do it well — the prompt formula, styles, editing and correct text — is shown step by step in the guidebook.</p>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq wrap">
+    <h2>Common questions</h2>
+    <details>
+      <summary>How will I get the guidebook?</summary>
+      <p>After payment, enter your name, email and UTR — a ready-made request email opens in your mail app. Send it, and the PDF copy will be emailed back to you after a quick verification.</p>
+    </details>
+    <details>
+      <summary>How do I pay?</summary>
+      <p>Pay ₹49 by UPI to <b>congress@jio</b> from any app — Google Pay, PhonePe, Paytm or BHIM. Then enter the UTR / Ref No. and the payment is verified.</p>
+    </details>
+    <details>
+      <summary>Do I need ChatGPT Plus for image generation?</summary>
+      <p>No. Image generation works on the free ChatGPT plan too — Plus only gives you more images per day and faster results. Everything in this guidebook works on the free plan.</p>
+    </details>
+  </section>
+</main>
+
+<footer class="foot wrap">
+  <span class="ava">S</span>
+  <div>© 2026 Saurabh Saha</div>
+</footer>
+
+<!-- STICKY BAR -->
+<div class="sticky" id="stickyBar">
+  <div>
+    <div class="t">ChatGPT Image Generation Guidebook</div>
+    <div class="p"><s>₹99</s> &nbsp;<b>₹49</b></div>
+  </div>
+  <div class="sp"></div>
+  <button class="btn btn-sm js-buy" type="button">Get it</button>
+</div>
+
+<!-- READER -->
+<div class="overlay rd" id="reader" role="dialog" aria-modal="true" aria-label="Look inside the guidebook">
+  <div class="scrim js-rd-close"></div>
+  <div class="rd-card">
+    <div class="rd-bar"><button class="lb-btn js-rd-close" type="button" aria-label="Close">✕</button></div>
+    <div class="rd-stage">
+      <div class="rd-book" id="rdBook">
+        <div class="rd-page coverp on">
+          <div class="pg-k" style="color:#E9B44C">ChatGPT Image Generation</div>
+          <h4>The Guidebook</h4>
+          <p>Make any image you can describe — posters, covers, posts and more.</p>
+          <div class="pg-n" style="color:#93A3C0">Cover</div>
+        </div>
+        <div class="rd-page">
+          <div class="pg-k">Chapter 3</div>
+          <h4>The prompt formula</h4>
+          <p>Every good image starts as five parts in one sentence: subject, scene, style, details, format. “A street dog [subject] sleeping under a tea-stall bench [scene], realistic photo [style], evening light, puddle reflections [details], vertical poster [format]…”</p>
+          <span class="rd-lock">🔒 The full page is in the guidebook</span>
+          <div class="pg-n">Page 5 of 14</div>
+        </div>
+        <div class="rd-page">
+          <div class="pg-k">Inside the guidebook</div>
+          <h4>What you will learn</h4>
+          <p>Setup, the 5-part prompt formula, styles and sizes, editing by reply, text that spells right, the same-character method, 10 tested prompts, troubleshooting and a one-page checklist — 14 pages in total.</p>
+          <span class="rd-lock">🔒 The full guidebook is 14 pages</span>
+          <div class="pg-n">Preview</div>
+        </div>
+        <div class="rd-page rd-end">
+          <span class="rd-end-logo">S</span>
+          <h4 style="margin-top:14px">Saurabh Saha</h4>
+          <p>Get all 14 pages in the guidebook — setup, the prompt formula, styles, editing, 10 tested prompts, troubleshooting and a one-page checklist.</p>
+          <div class="was"><s>₹99</s><em>50% off</em></div>
+          <div class="price">₹49</div>
+          <button class="btn js-buy" type="button" style="margin-top:14px;width:100%">Get the Guidebook</button>
+        </div>
+      </div>
+      <button class="lb-btn rd-nav lb-prev" id="rdPrev" type="button" aria-label="Previous page">‹</button>
+      <button class="lb-btn rd-nav lb-next" id="rdNext" type="button" aria-label="Next page">›</button>
+    </div>
+    <p class="rd-hint">Tap the page or use the arrows to turn pages</p>
+  </div>
+</div>
+
+<!-- PAYMENT SHEET -->
+<div class="overlay pay" id="paySheet" role="dialog" aria-modal="true" aria-label="Buy the guidebook">
+  <div class="scrim js-pay-close"></div>
+  <div class="pay-card">
+    <div class="pay-head">
+      <h3>Get the Guidebook</h3>
+      <button class="pay-x js-pay-close" type="button" aria-label="Close">✕</button>
+    </div>
+
+    <div id="paySteps">
+      <div class="pay-step">
+        <b>1</b>
+        <div class="tx">
+          <strong>Pay <span class="amt">₹49</span> by UPI</strong>
+          <div class="pay-num">
+            <div class="id"><small>UPI ID</small>congress@jio</div>
+            <button class="pay-copy" id="copyBtn" type="button">Copy</button>
+          </div>
+          <img class="pay-qr" alt="UPI QR code for ₹49" src="https://api.qrserver.com/v1/create-qr-code/?size=420x420&margin=8&data=upi%3A%2F%2Fpay%3Fpa%3Dcongress%40jio%26pn%3DSaurabh%2520Saha%26am%3D49.00%26cu%3DINR%26tn%3DChatGPT%2520Image%2520Generation%2520Guidebook">
+          <a class="btn pay-upi-btn" href="upi://pay?pa=congress@jio&pn=Saurabh%20Saha&am=49.00&cu=INR&tn=ChatGPT%20Image%20Generation%20Guidebook">Pay with UPI app</a>
+          <p class="pay-note">Pay to this UPI ID from any app — Google Pay, PhonePe, Paytm or BHIM. Pay exactly ₹49 so the payment can be matched.</p>
+        </div>
+      </div>
+
+      <div class="pay-step">
+        <b>2</b>
+        <div class="tx">
+          <strong>Your name + UTR / Ref No. from your UPI app</strong>
+          <input id="nameInput" type="text" autocomplete="name" placeholder="Your name" style="margin-top:12px">
+          <input id="emailInput" type="email" autocomplete="email" placeholder="Your email (the PDF will be sent here)">
+          <input id="utrInput" type="text" inputmode="numeric" maxlength="12" placeholder="12-digit UTR / Ref No.">
+          <div class="pay-err" id="payErr">Please check your details — the UTR is the 12-digit number shown in your UPI app after payment.</div>
+          <button class="btn go" id="verifyBtn" type="button">Verify &amp; Request PDF</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="pay-done" id="payDone">
+      <div class="pay-ok">✓</div>
+      <h4>Almost done — send the request email</h4>
+      <p>Your email app will open with a ready-made request. Just press send — after a quick UTR check, the PDF copy will be emailed to you.</p>
+      <a class="btn" id="emailBtn" href="#">Send the Request Email</a>
+      <p style="margin-top:12px">Keep your UTR safe — it is your proof of payment.</p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // sticky bar
+  var sticky = document.getElementById('stickyBar');
+  var buyRow = document.querySelector('.buy');
+  if('IntersectionObserver' in window && buyRow){
+    new IntersectionObserver(function(en){ sticky.classList.toggle('show', !en[0].isIntersecting && window.scrollY > 120); }, {threshold:0}).observe(buyRow);
+  }
+  // reader
+  var reader = document.getElementById('reader');
+  var pages = Array.prototype.slice.call(document.querySelectorAll('.rd-page'));
+  var rdBook = document.getElementById('rdBook');
+  var cur = 0;
+  function showPage(i){
+    cur = Math.max(0, Math.min(pages.length - 1, i));
+    pages.forEach(function(p, j){ p.classList.toggle('on', j === cur); });
+    rdBook.classList.remove('rd-fly'); void rdBook.offsetWidth; rdBook.classList.add('rd-fly');
+    document.getElementById('rdPrev').style.opacity = cur === 0 ? .35 : 1;
+    document.getElementById('rdNext').style.opacity = cur === pages.length - 1 ? .35 : 1;
+  }
+  function openReader(){ reader.classList.add('open'); document.body.style.overflow = 'hidden'; showPage(0); }
+  function closeReader(){ reader.classList.remove('open'); document.body.style.overflow = ''; }
+  document.querySelectorAll('.js-peek').forEach(function(b){ b.addEventListener('click', openReader); });
+  document.querySelectorAll('.js-rd-close').forEach(function(b){ b.addEventListener('click', closeReader); });
+  document.getElementById('rdPrev').addEventListener('click', function(e){ e.stopPropagation(); showPage(cur - 1); });
+  document.getElementById('rdNext').addEventListener('click', function(e){ e.stopPropagation(); showPage(cur + 1); });
+  rdBook.addEventListener('click', function(){ if(cur < pages.length - 1) showPage(cur + 1); });
+  var tx0 = null;
+  rdBook.addEventListener('touchstart', function(e){ tx0 = e.touches[0].clientX; }, {passive:true});
+  rdBook.addEventListener('touchend', function(e){
+    if(tx0 === null) return;
+    var dx = e.changedTouches[0].clientX - tx0;
+    if(Math.abs(dx) > 42) showPage(cur + (dx < 0 ? 1 : -1));
+    tx0 = null;
+  }, {passive:true});
+  // payment sheet
+  var pay = document.getElementById('paySheet');
+  function openPay(){ pay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closePay(){ pay.classList.remove('open'); document.body.style.overflow = ''; }
+  document.querySelectorAll('.js-buy').forEach(function(b){ b.addEventListener('click', function(){ closeReader(); openPay(); }); });
+  document.querySelectorAll('.js-pay-close').forEach(function(b){ b.addEventListener('click', closePay); });
+  document.getElementById('copyBtn').addEventListener('click', function(){
+    var btn = this;
+    function done(){ btn.textContent = 'Copied ✓'; setTimeout(function(){ btn.textContent = 'Copy'; }, 1800); }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText('congress@jio').then(done, done); } else { done(); }
+  });
+  document.getElementById('verifyBtn').addEventListener('click', function(){
+    var name = document.getElementById('nameInput').value.trim();
+    var email = document.getElementById('emailInput').value.trim();
+    var utr = document.getElementById('utrInput').value.trim();
+    var err = document.getElementById('payErr');
+    if(name.length < 2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || !/^\d{12}$/.test(utr)){ err.style.display = 'block'; return; }
+    err.style.display = 'none';
+    try{ localStorage.setItem('imagebook_order', JSON.stringify({name:name, email:email, utr:utr})); }catch(_){}
+    var subject = 'Image Guidebook PDF Request - UTR ' + utr;
+    var body = [
+      'Hi Saurabh,',
+      '',
+      'I have paid Rs.49 for the ChatGPT Image Generation Guidebook by UPI. Please send the PDF copy to this email.',
+      '',
+      'Name: ' + name,
+      'Email: ' + email,
+      'Amount Paid: Rs.49',
+      'UPI ID paid to: congress@jio',
+      'UTR / Ref No.: ' + utr,
+      '',
+      'Please verify my payment and send the guidebook PDF.',
+      '',
+      'Thank you.'
+    ].join('\n');
+    var mailto = 'mailto:sauravhhh@outlook.com?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+    document.getElementById('emailBtn').href = mailto;
+    document.getElementById('paySteps').style.display = 'none';
+    document.getElementById('payDone').style.display = 'block';
+    window.location.href = mailto;
+  });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape'){ closePay(); closeReader(); } });
+  if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(function(){}); }
+</script>
+</body>
+</html>
